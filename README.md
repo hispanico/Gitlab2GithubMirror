@@ -1,4 +1,3 @@
-test
 # How to automatically mirror a Gitlab project to Github
 
 Sometimes you need to auto-sync Gitlab repos to Github, so here's what you have to do.
