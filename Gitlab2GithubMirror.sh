@@ -58,7 +58,7 @@ fi
 # ---------------------------------------------------------------------------
 # Add github remote to git config
 if grep -q "git@github.com:$GithubUser/$GitlabProjectName.git" $GitLabProjectPath/config; then
-  echo "Githup remote is alredy configure into $GitlabProjectName"
+  echo "Github remote is alredy configured into $GitlabProjectName"
 else
   echo "Adding github remote to $GitlabProjectName git config"
   cat << EOF >> $GitLabProjectPath/config
