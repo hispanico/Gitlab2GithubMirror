@@ -57,17 +57,20 @@ fi
 # Main
 # ---------------------------------------------------------------------------
 # Add github remote to git config
-
-if [ $(grep "git@github.com:$GithubUser/$GitlabProjectName.git" $GitLabProjectPath/config 2>&1 > /dev/null) ]; then
-cat << EOF >> $GitLabProjectPath/config
+if grep -q "git@github.com:$GithubUser/$GitlabProjectName.git" $GitLabProjectPath/config; then
+  echo "Githup remote is alredy configure into $GitlabProjectName"
+else
+  echo "Adding github remote to $GitlabProjectName git config"
+  cat << EOF >> $GitLabProjectPath/config
 [remote "github"]
 	url = git@github.com:$GithubUser/$GitlabProjectName.git
 	fetch = +refs/heads/*:refs/remotes/github/*
 EOF
 fi
 
-#Create custom hooks to github mirroring
+# Create custom hooks to github mirroring
 [ ! -d $GitLabProjectPath/custom_hooks ] && mkdir $GitLabProjectPath/custom_hooks || :
+echo "Create custom hooks to github mirroring"
 cat << EOF > $GitLabProjectPath/custom_hooks/post-receive
 #!/usr/bin/env bash
 git push --mirror github
